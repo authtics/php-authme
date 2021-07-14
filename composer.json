@@ -1,0 +1,31 @@
+{
+    "name": "authtics/php-authme",
+    "description": "AuthMe SDK for PHP language",    
+    "keywords": [
+        "php",
+        "authme"
+    ],
+    "authors": [
+        {
+            "name": "Nitin Anand",
+            "email": "nitin@dev.authtics.com",
+            "role": "Developer"
+        }
+    ],
+    "license": "BSD-3-Clause",
+    "require": {
+        "firebase/php-jwt": "^5.4",
+        "php": ">=7.2",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-mbstring": "*",
+        "guzzlehttp/guzzle": "^6.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "AuthMe\\": "src",
+            "GeneratedGoogle\\" : "generated/google/lib/",
+            "GeneratedAuthMe\\" : "generated/authtics/lib/"
+        }
+    }
+}

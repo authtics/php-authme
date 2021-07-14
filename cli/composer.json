@@ -1,0 +1,21 @@
+{
+    "name": "authme/cli",
+    "description": "CLI to consume AuthMe SDK",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Nitin Anand",
+            "email": "nitin@dev.authtics.com"
+        }
+    ],
+    "require": {
+        "authtics/php-authme": "dev-master"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../"
+        }
+    ],
+    "minimum-stability": "dev"
+}

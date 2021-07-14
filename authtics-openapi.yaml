@@ -1,0 +1,93 @@
+openapi: "3.0.0"
+info:
+  description: "APIs for authentication and signing"
+  version: "1.0.0"
+  title: "Authtics API"
+  termsOfService: "https://www.authtics.com"
+  contact:
+    email: "askme@authtics.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+servers:
+  - url: "https://us-central1-approverequest-fbf70.cloudfunctions.net"
+tags:
+- name: "authenticate"
+  description: "Everything related to authentication"
+- name: "signing"
+  description: "Everything related to signing"
+paths:
+  /authenticate:
+    post:
+      tags:
+      - "authenticate"
+      summary: "Begin an authentication request"
+      description: ""
+      operationId: "authenticate"
+      requestBody:
+        description: "User details for authentication"
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthenticationRequest"
+      responses:
+        "200":
+          description: "Authentication Response"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthenticationResponse"
+components:
+  securitySchemes:
+    authSecurity:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    AuthenticationRequest:
+      type: "object"
+      properties:
+        username:
+          type: "string"
+        async:
+          type: boolean
+          default: false
+      required:
+        - username
+    AuthenticationResponse:
+      type: "object"
+      properties:
+        id:
+          type: string
+        response:
+          type: string
+          enum:
+            - ACCEPTED
+            - REJECTED
+            - TIMEOUT
+            - FAILED
+        username:
+          type: string
+        tbs:
+          type: string
+        publicKey:
+          type: string
+        signedData:
+          type: string
+        lastSuccessfulLogin:
+          type: string
+        lastRejectedLogin:
+          type: string
+        lastFailedLogin:
+          type: string
+        applicationId:
+          type: string
+        applicationName:
+          type: string
+      required:
+        - id
+        - response
+        - username
+security:
+  - authSecurity: []

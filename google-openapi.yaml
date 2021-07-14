@@ -1,0 +1,61 @@
+openapi: "3.0.0"
+info:
+  description: "API for token generation"
+  version: "1.0.0"
+  title: "Google API"
+servers:
+  - url: "https://www.googleapis.com/oauth2/v4"
+tags:
+- name: "token"
+  description: "Token generation API"
+paths:
+  /token:
+    post:
+      tags:
+      - "token"
+      summary: "Acquire new token"
+      description: ""
+      operationId: "generateToken"
+      requestBody:
+        description: ""
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: "#/components/schemas/TokenRequest"
+      responses:
+        "200":
+          description: "Successful token"
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TokenResponse"
+components:
+  securitySchemes:
+    authSecurity:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    TokenRequest:
+      type: "object"
+      properties:
+        grant_type:
+          type: string
+          readOnly: true
+          default: "urn:ietf:params:oauth:grant-type:jwt-bearer"
+        assertion:
+          type: string
+      required:
+      - grant_type
+      - assertion
+    TokenResponse:
+      type: "object"
+      properties:
+        id_token:
+          type: string
+          readOnly: true
+      required:
+      - id_token
+security:
+  - authSecurity: []
